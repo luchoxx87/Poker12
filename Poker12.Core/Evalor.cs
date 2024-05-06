@@ -1,6 +1,6 @@
 namespace Poker12.Core;
 
-public enum Evalor
+public enum EValor : byte
 {
     As = 1,
     Dos,

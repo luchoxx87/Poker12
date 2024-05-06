@@ -1,10 +1,8 @@
-namespace Poker12.Core
+namespace Poker12.Core;
+public enum EPalo : byte
 {
-    public enum EPalo
-    {
-        Corazom,
-        Diamante,
-        Picas,
-        Trebol
-    }
+    Corazon,
+    Diamante,
+    Picas,
+    Trebol
 }
