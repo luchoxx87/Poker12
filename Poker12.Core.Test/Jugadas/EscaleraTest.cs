@@ -19,11 +19,11 @@ public class EscaleraTest
     {
         var jugada = new List<Carta>()
         {
+            new(EPalo.Trebol, EValor.Cuatro),
+            new(EPalo.Picas, EValor.Seis),
+            new(EPalo.Corazon, EValor.Cinco),
             new(EPalo.Diamante, EValor.Dos),
             new(EPalo.Corazon, EValor.Tres),
-            new(EPalo.Trebol, EValor.Cuatro),
-            new(EPalo.Corazon, EValor.Cinco),
-            new(EPalo.Picas, EValor.Seis),
         };
         var resultado = escalera.Aplicar(jugada);
 
@@ -31,15 +31,15 @@ public class EscaleraTest
     }
 
     [Fact]
-    public void CorrectoEscaleraConAS()
+    public void CorrectoEscaleraConASComoUno()
     {
         var jugada = new List<Carta>()
         {
-            new(EPalo.Diamante, EValor.As),
-            new(EPalo.Corazon, EValor.Dos),
-            new(EPalo.Trebol, EValor.Tres),
-            new(EPalo.Corazon, EValor.Cuatro),
             new(EPalo.Picas, EValor.Cinco),
+            new(EPalo.Corazon, EValor.Dos),
+            new(EPalo.Corazon, EValor.Cuatro),
+            new(EPalo.Trebol, EValor.Tres),
+            new(EPalo.Diamante, EValor.As),
         };
         var resultado = escalera.Aplicar(jugada);
 
@@ -47,18 +47,33 @@ public class EscaleraTest
     }
 
     [Fact]
-    public void CorrectoEscaleraConASNumeroGrande()
+    public void CorrectoEscaleraConASComoCatorce()
     {
         var jugada = new List<Carta>()
         {
+            new(EPalo.Picas, EValor.Diez),
             new(EPalo.Corazon, EValor.J),
+            new(EPalo.Diamante, EValor.As),
             new(EPalo.Trebol, EValor.Q),
             new(EPalo.Corazon, EValor.K),
-            new(EPalo.Picas, EValor.Diez),
-            new(EPalo.Diamante, EValor.As),
         };
         var resultado = escalera.Aplicar(jugada);
 
         Assert.Equal(14, resultado.Valor);
+    }
+    [Fact]
+    public void IncorrectoEscalera()
+    {
+        var jugada = new List<Carta>()
+        {
+            new(EPalo.Picas, EValor.Nueve),
+            new(EPalo.Corazon, EValor.J),
+            new(EPalo.Diamante, EValor.As),
+            new(EPalo.Trebol, EValor.Q),
+            new(EPalo.Corazon, EValor.K),
+        };
+        var resultado = escalera.Aplicar(jugada);
+
+        Assert.Equal(0, resultado.Valor);
     }
 }

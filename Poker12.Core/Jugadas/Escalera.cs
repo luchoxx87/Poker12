@@ -1,4 +1,3 @@
-
 namespace Poker12.Core.Jugadas;
 
 public class Escalera : IJugada
@@ -11,25 +10,28 @@ public class Escalera : IJugada
     {
         if (cartas.Count == 0)
             throw new ArgumentException("No hay cartas");
-        var ordenadasPorValor = cartas.OrderBy(c => c.Valor);
-        var valormax = (byte)ordenadasPorValor.Last().Valor;
-        var valormin = (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
-        byte i = 0;
-        if (cartas.Find())
+        var ordenadasPorValor = cartas.OrderBy(c => c.Valor).ToList();
+        var i =  (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
+        var valor = (byte)ordenadasPorValor.Last().Valor;
+        if (valor == 13)
         {
-            valormax = ordenadasPorValor.First().Valor == EValor.As ?
-                            (byte)14 : // Aca use el valor 'Alto' del As
-                            (byte)ordenadasPorValor.Last().Valor; // Como estan ordenadas, la ultima es la mayor
+            valor = 14;
+            ordenadasPorValor.RemoveAll(x => x.Valor == EValor.As);
+            i =  (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
+            foreach (var item in ordenadasPorValor)
+            {
+            if (i != (byte)item.Valor || valor != 14)
+                return new Resultado(Prioridad, 0);
+            i++;
+            }
+            return new Resultado(Prioridad, valor);
         }
-
-        
-        i = valormin;
-        foreach (var item in cartas)
+        foreach (var item in ordenadasPorValor)
         {
-            if (i != ((byte)item.Valor))
+            if (i != (byte)item.Valor)
                 return new Resultado(Prioridad, 0);
             i++;
         }
-        return new Resultado(Prioridad, valormax);
+        return new Resultado(Prioridad, valor);
     }
 }
