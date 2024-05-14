@@ -13,7 +13,7 @@ public class Escalera : IJugada
         var ordenadasPorValor = cartas.OrderBy(c => c.Valor).ToList();
         var i =  (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
         var valor = (byte)ordenadasPorValor.Last().Valor;
-        if (valor == 13)
+        if (valor == 13 && i == 1)
         {
             valor = 14;
             ordenadasPorValor.RemoveAll(x => x.Valor == EValor.As);
