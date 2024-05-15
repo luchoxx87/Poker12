@@ -11,20 +11,17 @@ public class Color : IJugada
     {
         if (cartas.Count == 0)
             throw new ArgumentException("No hay cartas");
+        if (cartas.Count != 5)
+            throw new InvalidOperationException("Tienen que ser 5 cartas");
+
         var ordenadasPorValor = cartas.OrderBy(c => c.Valor);
 
         var valor = ordenadasPorValor.First().Valor == EValor.As ?
                         (byte)14 : // Aca use el valor 'Alto' del As
                         (byte)ordenadasPorValor.Last().Valor; // Como estan ordenadas, la ultima es la mayor 
 
-        string primer_color = cartas.First().Palo.ToString();
-
-        foreach (var item in cartas)
-        {
-            if (primer_color != item.Palo.ToString())
-                return new Resultado(Prioridad, 0);
-
-        }
-        return new Resultado(Prioridad, valor);
+        return cartas.TrueForAll(ov => ordenadasPorValor.First().Palo.ToString() == ov.Palo.ToString()) ?
+                new Resultado(Prioridad, valor) :
+                new Resultado(Prioridad, 0);
     }
 }
