@@ -1,5 +1,4 @@
 namespace Poker12.Core.Jugadas;
-
 public class Escalera : IJugada
 {
     public string Nombre => "Escalera";
@@ -10,28 +9,23 @@ public class Escalera : IJugada
     {
         if (cartas.Count == 0)
             throw new ArgumentException("No hay cartas");
+        if (cartas.Count != 5)
+            throw new InvalidOperationException("Tienen que ser 5 cartas");
+
         var ordenadasPorValor = cartas.OrderBy(c => c.Valor).ToList();
-        var i =  (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
+        var i = (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
         var valor = (byte)ordenadasPorValor.Last().Valor;
         if (valor == 13 && i == 1)
         {
             valor = 14;
             ordenadasPorValor.RemoveAll(x => x.Valor == EValor.As);
-            i =  (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
-            foreach (var item in ordenadasPorValor)
-            {
-            if (i != (byte)item.Valor || valor != 14)
-                return new Resultado(Prioridad, 0);
-            i++;
-            }
-            return new Resultado(Prioridad, valor);
+            i = (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
+            return ordenadasPorValor.TrueForAll(ov => i++ == (byte)ov.Valor && valor == 14) ?
+                new Resultado(Prioridad, valor) :
+                new Resultado(Prioridad, 0);
         }
-        foreach (var item in ordenadasPorValor)
-        {
-            if (i != (byte)item.Valor)
-                return new Resultado(Prioridad, 0);
-            i++;
-        }
-        return new Resultado(Prioridad, valor);
+        return ordenadasPorValor.TrueForAll(ov => i++ == (byte)ov.Valor) ?
+                new Resultado(Prioridad, valor) :
+                new Resultado(Prioridad, 0);
     }
 }

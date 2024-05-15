@@ -15,6 +15,19 @@ public class EscaleraTest
     }
 
     [Fact]
+    public void FallaPorJugadaSinCincoCartas()
+    {
+        var jugada = new List<Carta>()
+        {
+            new(EPalo.Corazon, EValor.Dos),
+            new(EPalo.Corazon, EValor.Tres),
+            new(EPalo.Corazon, EValor.Dos),
+        };
+
+        Assert.Throws<InvalidOperationException>(() => escalera.Aplicar(jugada));
+    }
+
+    [Fact]
     public void CorrectoEscaleraSinAS()
     {
         var jugada = new List<Carta>()
