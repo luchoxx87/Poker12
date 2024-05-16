@@ -30,4 +30,36 @@ public class PokerTest
 
         Assert.Equal(10, resultado.Valor);
     }
+    [Fact]
+    public void PruebaConAs()
+    {
+        var jugada = new List<Carta>()
+        {
+            new(EPalo.Corazon, EValor.As),
+            new(EPalo.Picas, EValor.As),
+            new(EPalo.Diamante, EValor.As),
+            new(EPalo.Trebol, EValor.Dos),
+            new(EPalo.Diamante, EValor.As)
+        };
+
+        var resultado = _Poker.Aplicar(jugada);
+
+        Assert.Equal(14, resultado.Valor);
+    }
+    [Fact]
+    public void PruebaError()
+    {
+        var jugada = new List<Carta>()
+        {
+            new(EPalo.Corazon, EValor.Tres),
+            new(EPalo.Picas, EValor.Tres),
+            new(EPalo.Diamante, EValor.As),
+            new(EPalo.Trebol, EValor.Dos),
+            new(EPalo.Diamante, EValor.As)
+        };
+
+        var resultado = _Poker.Aplicar(jugada);
+
+        Assert.Equal(0, resultado.Valor);
+    }
 }

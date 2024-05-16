@@ -28,6 +28,9 @@ public class Poker : IJugada
 
         var valor = numerosRepetidos[0];
 
+        if (valor == 1)
+            valor = 14;
+
         if (numerosRepetidos.Count == 1 && cantidadNumerosDistintos == 2)
 
             return new Resultado(Prioridad, valor);
