@@ -8,6 +8,8 @@ public Resultado Aplicar(List<Carta> cartas)
 {
     if (cartas.Count == 0)
         throw new ArgumentException("No hay cartas");
+    if (cartas.Count != 5)
+        throw new ArgumentException("Se deben ingresar 5 cartas");
 
     var valorCounts = cartas.GroupBy(carta => carta.Valor).ToDictionary(group => group.Key, group => group.Count());
 
