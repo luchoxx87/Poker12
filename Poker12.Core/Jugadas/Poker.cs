@@ -7,6 +7,8 @@ public class Poker : IJugada
     {
         if (cartas.Count == 0)
             throw new ArgumentException("No hay cartas");
+        if (cartas.Count != 5)
+            throw new ArgumentException("Tienen que ser 5 cartas para jugar al poker flaco");
 
         var numeros = cartas.
                         Select(c => (byte)c.Valor).
