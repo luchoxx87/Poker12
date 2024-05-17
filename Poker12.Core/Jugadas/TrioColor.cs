@@ -1,25 +1,21 @@
-namespace Poker12.Core.Jugadas
+namespace Poker12.Core.Jugadas;
+
+public class TrioColor : IJugada
 {
-    public class TrioColor : IJugada
+    public string Nombre => "Trio Color";
+
+    public byte Prioridad => 8; // Podemos asignarle una prioridad adecuada basada en las reglas del póker
+
+    public Resultado Aplicar(List<Carta> cartas)
     {
-        public string Nombre => "Trío de Color";
-        public byte Prioridad => 30; // Prioridad ajustada para un Trío de Color
-        public Resultado Aplicar(List<Carta> cartas)
-        {
-            if (cartas.Count != 3)
-                throw new ArgumentException("Se requieren exactamente 3 cartas para un Trío de Color.");
-            // Verifica que todas las cartas tengan el mismo palo
-            if (cartas.Select(c => c.Palo).Distinct().Count() != 1)
-                return new Resultado(Prioridad); // No es Trío de Color
-            // Ordena las cartas por valor y verifica si son iguales (es decir, un trío)
-            var ordenadasPorValor = cartas.OrderBy(cartas => cartas.Valor).ToList();
-            if (ordenadasPorValor[0].Valor == ordenadasPorValor[1].Valor &&
-                ordenadasPorValor[1].Valor == ordenadasPorValor[2].Valor)
-            {
-                var valor = (byte)ordenadasPorValor[0].Valor;
-                return new Resultado(Prioridad, valor);
-            }
-            return new Resultado(Prioridad); // No es Trío de Color
-        }
+        if (cartas.Count < 3)
+            throw new ArgumentException("Necesitas al menos 3 cartas para jugar un Trio Color");
+
+        var palos = cartas.Select(c => c.Palo).Distinct().ToList();
+
+        if (palos.Count!= 1)
+            return new Resultado(Prioridad, 0); // Todas las cartas no son del mismo palo
+
+        return new Resultado(Prioridad, (byte)(palos[0] + 10)); // Sumamos 10 porque el As vale 1 y queremos evitar conflictos
     }
 }

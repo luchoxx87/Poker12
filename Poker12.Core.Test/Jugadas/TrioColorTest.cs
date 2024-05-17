@@ -1,55 +1,49 @@
 using Poker12.Core.Jugadas;
+
 namespace Poker12.Core.Test.Jugadas
 {
     public class TrioColorTest
     {
-        public IJugada _trioColor;
+        private IJugada _trioColor;
+
         public TrioColorTest() => _trioColor = new TrioColor();
+
         [Fact]
-        public void FallaSiNoHayTresCartas()
+        public void FallaPorMenosDeTresCartas()
         {
             var jugada = new List<Carta>();
+
             Assert.Throws<ArgumentException>(() => _trioColor.Aplicar(jugada));
         }
+
         [Fact]
-        public void FallaSiLasCartasNoSonDelMismoPalo()
+        public void CorrectoTrioColor()
         {
-            var jugada = new List<Carta>()
-    {
-        new Carta(EPalo.Corazon, EValor.Tres),
-        new Carta(EPalo.Diamante, EValor.Tres),
-        new Carta(EPalo.Picas, EValor.Tres)
-    };
-            // En lugar de esperar una excepción, vamos a verificar que el resultado tenga la prioridad correcta
-            // Esto asume que la implementación de TrioColor.Aplicar retorna un Resultado con la prioridad correcta
-            // cuando las cartas no son del mismo palo.
-            var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal(_trioColor.Prioridad, resultado.Prioridad);
-        }
-        //
-        [Fact]
-        public void TienePrioridadCorrectaCuandoEsValido()
-        {
-            var jugada = new List<Carta>()
+            var jugada = new List<Carta>
             {
-                new Carta(EPalo.Corazon, EValor.Tres),
-                new Carta(EPalo.Corazon, EValor.Tres),
-                new Carta(EPalo.Corazon, EValor.Tres)
+                new(EPalo.Corazon, EValor.As),
+                new(EPalo.Corazon, EValor.Seis),
+                new(EPalo.Corazon, EValor.Siete)
             };
+
             var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal(30, resultado.Prioridad);
+
+            Assert.Equal(11, resultado.Valor); // El As vale 1, por lo que el resultado es 11
         }
+
         [Fact]
-        public void RetornaElValorCorrectoCuandoEsValido()
+        public void IncorrectoTrioColor()
         {
-            var jugada = new List<Carta>()
+            var jugada = new List<Carta>
             {
-                new Carta(EPalo.Corazon, EValor.Tres),
-                new Carta(EPalo.Corazon, EValor.Tres),
-                new Carta(EPalo.Corazon, EValor.Tres)
+                new(EPalo.Corazon, EValor.As),
+                new(EPalo.Diamante, EValor.Seis),
+                new(EPalo.Picas, EValor.Siete)
             };
+
             var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal((byte)EValor.Tres, resultado.Valor);
+
+            Assert.Equal(0, resultado.Valor); // Todas las cartas no son del mismo palo
         }
     }
 }

@@ -1,44 +1,33 @@
-namespace Poker12.Core.Jugadas
+namespace Poker12.Core.Jugadas;
+public class DoblePar : IJugada
 {
-    public class DoblePar : IJugada
+    public string Nombre => "Doble Par";
+
+    public byte Prioridad => 7; // Podemos asignarle una prioridad adecuada basada en las reglas del póker
+
+    public Resultado Aplicar(List<Carta> cartas)
     {
-        public string Nombre => "Doble Par";
-        public byte Prioridad => 4;
-        public Resultado Aplicar(List<Carta> cartas)
-        {
-            if (cartas.Count < 4)
-                throw new ArgumentException("No hay suficientes cartas para formar un Doble Par");
-            var conteoValores = new Dictionary<EValor, int>();
-            foreach (var carta in cartas)
-            {
-                if (conteoValores.ContainsKey(carta.Valor))
-                {
-                    //Si el valor de la carta ya existe en el diccionario entonces se incrementa el valor asociado a esa clave en uno Esto significa que cada vez que se encuentra una carta con un valor que ya ha sido contado, se aumenta el conteo de esa carta en uno.
-                    conteoValores[carta.Valor]++;
-                }
-                else
-                {
-                    //Si el valor de la carta no existe en el diccionario retorna false), entonces se añade una nueva entrada al diccionario con ese valor como clave y 1 como valor asociado. Esto registra por primera vez el conteo de esa carta.
-                    conteoValores[carta.Valor] = 1;
-                }
-            }
-            var pares = new List<(EValor, int)>();
-            foreach (var valor in conteoValores.Keys)
-            {
-                // es igual a 2. Esto significa que se está buscando valores que aparezcan exactamente dos veces en la lista original de cartas, ya que estos son los criterios para formar un par.
-                if (conteoValores[valor] == 2)
-                {
-                    pares.Add((valor, conteoValores[valor]));
-                }
-            }
-            if (pares.Count!= 2)
-                throw new InvalidOperationException("No se pudo formar un Doble Par");
-            // Ordenamos los pares por valor para determinar cuál es el par más alto
-            pares.Sort((a, b) => b.Item2.CompareTo(a.Item2));
-            // Devolvemos el par más alto como el resultado de la jugada
-            return new Resultado(Prioridad, (byte)pares[0].Item1);
-        }
+        if (cartas.Count < 4)
+            throw new ArgumentException("Necesitas al menos 4 cartas para jugar un Doble Par");
+
+        var valores = cartas.Select(c => c.Valor).ToList();
+
+        // Contar cuántas veces aparece cada valor
+        var conteoValores = valores.GroupBy(v => v).ToDictionary(g => g.Key, g => g.Count());
+
+        // Buscar los valores que aparecen exactamente dos veces
+        var parejas = conteoValores.Where(p => p.Value == 2).Select(p => p.Key).ToList();
+
+        if (parejas.Count!= 2)
+            return new Resultado(Prioridad, 0); // No hay dos pares
+
+        // Verificar si uno de los pares es de dos cartas del mismo rango
+        var primerPar = parejas[0];
+        var segundoPar = parejas[1];
+        if (primerPar == segundoPar)
+            return new Resultado(Prioridad, (byte)(primerPar + 9)); // Sumamos 9 porque el As vale 1 y queremos evitar conflictos
+
+        // Si no cumplimos con el criterio de tener dos pares del mismo rango, retornamos 0
+        return new Resultado(Prioridad, 0);
     }
 }
-
-
