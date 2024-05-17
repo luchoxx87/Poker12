@@ -129,8 +129,8 @@ public class EscaleraTest
             new(EPalo.Trebol, EValor.As),
             new(EPalo.Picas, EValor.As),
             new(EPalo.Corazon, EValor.As),
+            new(EPalo.Corazon, EValor.Q),
             new(EPalo.Diamante, EValor.K),
-            new(EPalo.Corazon, EValor.Tres),
         };
         var resultado = escalera.Aplicar(jugada);
 

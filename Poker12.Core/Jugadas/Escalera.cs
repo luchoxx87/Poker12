@@ -19,6 +19,8 @@ public class Escalera : IJugada
         {
             valor = 14;
             ordenadasPorValor.RemoveAll(x => x.Valor == EValor.As);
+            if (ordenadasPorValor.Count() != 4)
+                return new Resultado(Prioridad, 0);
             i = (byte)ordenadasPorValor.First().Valor; // Como estan ordenadas, la primera es la menor
             return ordenadasPorValor.TrueForAll(ov => i++ == (byte)ov.Valor && valor == 14) ?
                 new Resultado(Prioridad, valor) :
