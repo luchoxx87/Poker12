@@ -21,14 +21,14 @@ namespace Poker12.Core.Test.Jugadas
         {
             var jugada = new List<Carta>
             {
-                new(EPalo.Corazon, EValor.As),
-                new(EPalo.Corazon, EValor.Seis),
-                new(EPalo.Corazon, EValor.Siete)
+                new(EPalo.Corazon, EValor.Cinco),
+                new(EPalo.Corazon, EValor.Cinco),
+                new(EPalo.Corazon, EValor.Cinco)
             };
 
             var resultado = _trioColor.Aplicar(jugada);
 
-            Assert.Equal(11, resultado.Valor); // El As vale 1, por lo que el resultado es 11
+            Assert.Equal(5, resultado.Valor); // El As vale 1, por lo que el resultado es 11
         }
 
         [Fact]
