@@ -5,9 +5,7 @@ namespace Poker12.Core.Test.Jugadas
     public class DobleParTest
     {
         private IJugada _doblePar;
-
         public DobleParTest() => _doblePar = new DoblePar();
-
         [Fact]
         public void FallaPorMenosDeCuatroCartas()
         {
@@ -15,7 +13,6 @@ namespace Poker12.Core.Test.Jugadas
 
             Assert.Throws<ArgumentException>(() => _doblePar.Aplicar(jugada));
         }
-
         [Fact]
         public void CorrectoDobleParDelMismoRango()
         {
@@ -27,12 +24,9 @@ namespace Poker12.Core.Test.Jugadas
                 new(EPalo.Picas, EValor.Seis),
                 new(EPalo.Corazon, EValor.Siete)
             };
-
             var resultado = _doblePar.Aplicar(jugada);
-
-            Assert.Equal(14, resultado.Valor); // El par de treses y seis suman 14
+            Assert.Equal(14, resultado.Valor); 
         }
-
         [Fact]
         public void IncorrectoDobleParDelMismoRango()
         {
@@ -44,12 +38,9 @@ namespace Poker12.Core.Test.Jugadas
                 new(EPalo.Picas, EValor.Seis),
                 new(EPalo.Corazon, EValor.Ocho)
             };
-
             var resultado = _doblePar.Aplicar(jugada);
-
-            Assert.Equal(0, resultado.Valor); // No hay dos pares del mismo rango
+            Assert.Equal(0, resultado.Valor);
         }
-
         [Fact]
         public void CorrectoDobleParDistintoRango()
         {
@@ -61,12 +52,9 @@ namespace Poker12.Core.Test.Jugadas
                 new(EPalo.Picas, EValor.Seis),
                 new(EPalo.Corazon, EValor.Siete)
             };
-
             var resultado = _doblePar.Aplicar(jugada);
-
-            Assert.Equal(13, resultado.Valor); // El par de treses y seis suman 13
+            Assert.Equal(13, resultado.Valor); 
         }
-
         [Fact]
         public void IncorrectoDobleParDistintoRango()
         {
@@ -80,8 +68,7 @@ namespace Poker12.Core.Test.Jugadas
             };
 
             var resultado = _doblePar.Aplicar(jugada);
-
-            Assert.Equal(0, resultado.Valor); // No hay dos pares del mismo rango
+            Assert.Equal(0, resultado.Valor); 
         }
     }
 }
