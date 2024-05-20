@@ -17,14 +17,14 @@ namespace Poker12.Core.Test.Jugadas
         {
             var jugada = new List<Carta>
             {
-                new(EPalo.Picas, EValor.Tres),
-                new(EPalo.Picas, EValor.Tres),
+                new(EPalo.Picas, EValor.K),
+                new(EPalo.Picas, EValor.K),
                 new(EPalo.Corazon, EValor.Seis),
                 new(EPalo.Picas, EValor.Seis),
                 new(EPalo.Trebol, EValor.Siete),
             };
             var resultado = _doblePar.Aplicar(jugada);
-            Assert.Equal(6, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
+            Assert.Equal(13, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
         }
         [Fact]
         public void IncorrectoDobleParDelMismoRango()

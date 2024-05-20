@@ -16,14 +16,14 @@ namespace Poker12.Core.Test.Jugadas
         {
             var jugada = new List<Carta>
             {
-                new(EPalo.Picas, EValor.Cinco),
-                new(EPalo.Trebol, EValor.Cinco),
-                new(EPalo.Corazon, EValor.Cinco),
+                new(EPalo.Picas, EValor.As),
+                new(EPalo.Trebol, EValor.As),
+                new(EPalo.Corazon, EValor.As),
                 new(EPalo.Diamante, EValor.Siete),
                 new(EPalo.Picas, EValor.Cuatro)
             };
             var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal(5, resultado.Valor); 
+            Assert.Equal(14, resultado.Valor); 
         }
         [Fact]
         public void IncorrectoTrioColor()
