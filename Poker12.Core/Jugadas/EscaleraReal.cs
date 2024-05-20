@@ -8,7 +8,7 @@ public class EscaleraReal : IJugada
     public byte Prioridad => 1; 
     public Resultado Aplicar(List<Carta> cartas) 
     { 
-        if (cartas.Count == 5) 
+        if (cartas.Count < 5) 
         { 
             throw new ArgumentException("No se puede realizar esta jugada"); 
         } 
