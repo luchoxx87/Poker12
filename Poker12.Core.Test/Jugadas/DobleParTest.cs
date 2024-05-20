@@ -1,7 +1,4 @@
-using Xunit;
-using Poker12.Core;
 using Poker12.Core.Jugadas;
-
 namespace Poker12.Core.Test.Jugadas
 {
     public class DobleParTest
@@ -24,16 +21,12 @@ namespace Poker12.Core.Test.Jugadas
                 new(EPalo.Picas, EValor.Tres),
                 new(EPalo.Corazon, EValor.Seis),
                 new(EPalo.Picas, EValor.Seis),
-<<<<<<< HEAD
-                new(EPalo.Trebol, EValor.Siete)
-=======
-                new(EPalo.Corazon, EValor.Ocho)
->>>>>>> 1a48fc8bac6aa35651033d70fdf34c326e8e47ce
+                new(EPalo.Trebol, EValor.Siete),
             };
             var resultado = _doblePar.Aplicar(jugada);
             Assert.Equal(6, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
         }
-       [Fact]
+        [Fact]
         public void IncorrectoDobleParDelMismoRango()
         {
             var jugada = new List<Carta>

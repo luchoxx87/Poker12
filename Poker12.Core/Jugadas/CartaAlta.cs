@@ -11,9 +11,8 @@ public class CartaAlta : IJugada
         var ordenadasPorValor = cartas.OrderBy(c => c.Valor);
 
         var valor = ordenadasPorValor.First().Valor == EValor.As ?
-                        (byte)14 : // Aca use el valor 'Alto' del As
-                        (byte)ordenadasPorValor.Last().Valor; // Como estan ordenadas, la ultima es la mayor 
-
+        (byte)14 : // Aca use el valor 'Alto' del As
+        (byte)ordenadasPorValor.Last().Valor; // Como estan ordenadas, la ultima es la mayor 
         return new Resultado(Prioridad, valor);
     }
 }

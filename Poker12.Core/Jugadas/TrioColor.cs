@@ -7,16 +7,12 @@ public class TrioColor : IJugada
     {
         if (cartas.Count < 3)
             throw new ArgumentException("Necesitas al menos 3 cartas para jugar un Trio Color");
-        var tripleValue = cartas.GroupBy(c => c.Valor).FirstOrDefault(g => g.Count() == 3)?.Key;
-        if (tripleValue.HasValue)
+        var groups = cartas.GroupBy(c => c.Valor).Where(g => g.Count() == 3);
+        if (groups.Any())
         {
-            return new Resultado(Prioridad, tripleValue.Value == EValor.As ? (byte)14 : (byte)tripleValue.Value);
+            var highestValue = groups.Max(g => g.Key);
+            return new Resultado(Prioridad, highestValue == EValor.As? (byte)14 : (byte)highestValue);
         }
         return new Resultado(Prioridad, 0); 
     }
-<<<<<<< HEAD
 }
-=======
-}
-
->>>>>>> 1a48fc8bac6aa35651033d70fdf34c326e8e47ce
