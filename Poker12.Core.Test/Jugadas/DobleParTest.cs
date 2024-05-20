@@ -16,13 +16,12 @@ namespace Poker12.Core.Test.Jugadas
         {
             var jugada = new List<Carta>
             {
-                new(EPalo.Corazon, EValor.Tres),
+                new(EPalo.Picas, EValor.Tres),
                 new(EPalo.Picas, EValor.Tres),
                 new(EPalo.Corazon, EValor.Seis),
                 new(EPalo.Picas, EValor.Seis),
-                new(EPalo.Corazon, EValor.Siete)
+                new(EPalo.Trebol, EValor.Siete)
             };
-
             var resultado = _doblePar.Aplicar(jugada);
             Assert.Equal(6, resultado.Valor); // El par de treses y seis suman 14
         }
