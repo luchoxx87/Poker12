@@ -14,4 +14,9 @@ public class TrioColor : IJugada
         }
         return new Resultado(Prioridad, 0); 
     }
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> 1a48fc8bac6aa35651033d70fdf34c326e8e47ce
