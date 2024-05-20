@@ -1,10 +1,10 @@
 using Poker12.Core.Jugadas;
 namespace Poker12.Core.Test.Jugadas
 {
-    public class TrioColorTest
+    public class TrioTest
     {
         private IJugada _trioColor;
-        public TrioColorTest() => _trioColor = new TrioColor();
+        public TrioTest() => _trioColor = new Trio();
         [Fact]
         public void FallaPorMenosDeTresCartas()
         {

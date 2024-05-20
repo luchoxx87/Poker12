@@ -26,6 +26,19 @@ namespace Poker12.Core.Test.Jugadas
             var resultado = _doblePar.Aplicar(jugada);
             Assert.Equal(6, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
         }
+        public void CorrectoDobleParDeAs()
+        {
+            var jugada = new List<Carta>
+            {
+                new(EPalo.Picas, EValor.As),
+                new(EPalo.Picas, EValor.As),
+                new(EPalo.Corazon, EValor.Seis),
+                new(EPalo.Picas, EValor.Seis),
+                new(EPalo.Trebol, EValor.Siete),
+            };
+            var resultado = _doblePar.Aplicar(jugada);
+            Assert.Equal(6, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
+        }
         [Fact]
         public void IncorrectoDobleParDelMismoRango()
         {

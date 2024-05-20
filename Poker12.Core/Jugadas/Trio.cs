@@ -1,5 +1,5 @@
 namespace Poker12.Core.Jugadas;
-public class TrioColor : IJugada
+public class Trio : IJugada
 {
     public string Nombre => "Trio Color";
     public byte Prioridad => 7; 
