@@ -13,19 +13,13 @@ public Resultado Aplicar(List<Carta> cartas)
 
     var valorCounts = cartas.GroupBy(carta => carta.Valor).ToDictionary(group => group.Key, group => group.Count());
 
-    byte valor = 0;
-
-    foreach (var pair in valorCounts)
-    {
-        if (pair.Value == 3)
-        {
-            valor = (byte)pair.Key;
-            break;
-        }
-    }
-
-    if (valor != 0 && valorCounts.Count == 2 && valorCounts.ContainsValue(2))
-        return new Resultado(Prioridad, valor);
+    var valor = valorCounts.LastOrDefault(x => x.Value == 3).Key;
+    
+if (valor == EValor.As)
+    valor = EValor.K+1;
+    
+    if (valor != 0 && valorCounts.ContainsValue(2) && valorCounts.ContainsValue(3))
+        return new Resultado(Prioridad, (byte)valor);
     else
         return new Resultado(Prioridad, 0);
 }
