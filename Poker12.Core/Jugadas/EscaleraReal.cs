@@ -8,7 +8,7 @@ public class EscaleraReal : IJugada
     public byte Prioridad => 1; 
     public Resultado Aplicar(List<Carta> cartas) 
     { 
-        if (cartas.Count == 5) 
+        if (cartas.Count < 5) 
         { 
             throw new ArgumentException("No se puede realizar esta jugada"); 
         } 
@@ -16,11 +16,11 @@ public class EscaleraReal : IJugada
         bool sonDiamantes = cartas.All(x => x.Palo == EPalo.Diamante); 
         bool sonPicas = cartas.All(x => x.Palo == EPalo.Picas); 
         bool sonTreboles = cartas.All(x => x.Palo == EPalo.Trebol); 
-        
+
         if (sonCorazones || sonDiamantes || sonPicas || sonTreboles) 
         { 
             var ordenadasPorValor = cartas.OrderBy(x => x.Valor).ToList(); 
- 
+
             var filtrarJugada = cartas.Where(x => x.Valor == EValor.As || 
                                                         x.Valor == EValor.Diez || 
                                                         x.Valor == EValor.J || 
