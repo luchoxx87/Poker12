@@ -39,6 +39,11 @@ public class CartasJugada
     /// </summary>
     /// <returns>Devuelve la mayor carta ordenada por valor</returns>
     public Carta MayorOrdenada => OrdenadasPorValor.Last();
+    /// <summary>
+    /// Devuelve el mayor valor absoluto que cumple tener al menos la misma cantidad de cartas.
+    /// </summary>
+    /// <param name="nCartas">Cantidad de cartas</param>
+    /// <returns>Devuelve el valor absoluto y cero en caso de no existir</returns>
     public byte MayorValorConNCartas(int nCartas)
     {
         var valoresOrdenados = AgrupadasPorValor.
@@ -77,7 +82,10 @@ public class CartasJugada
         get
         {
             byte i = (byte)MenorOrdenada.Valor;
-            return OrdenadasPorValor.All(c => (byte)c.Valor == i++);
+            if (OrdenadasPorValor.All(c => (byte)c.Valor == i++))
+                return true;
+            i = (byte)EValor.Diez;
+            return OrdenadasPorValor.Skip(1).All(c => (byte)c.Valor == i++);
         }
     }
 }

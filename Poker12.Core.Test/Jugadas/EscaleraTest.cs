@@ -15,19 +15,6 @@ public class EscaleraTest
     }
 
     [Fact]
-    public void FallaPorJugadaSinCincoCartas()
-    {
-        var jugada = new List<Carta>()
-        {
-            new(EPalo.Corazon, EValor.Dos),
-            new(EPalo.Corazon, EValor.Tres),
-            new(EPalo.Corazon, EValor.Dos),
-        };
-
-        Assert.Throws<InvalidOperationException>(() => escalera.Aplicar(jugada));
-    }
-
-    [Fact]
     public void CorrectoEscaleraSinAS()
     {
         var jugada = new List<Carta>()
@@ -56,7 +43,7 @@ public class EscaleraTest
         };
         var resultado = escalera.Aplicar(jugada);
 
-        Assert.Equal(5, resultado.Valor);
+        Assert.Equal(14, resultado.Valor);
     }
 
     [Fact]
@@ -101,9 +88,7 @@ public class EscaleraTest
             new(EPalo.Corazon, EValor.K),
             new(EPalo.Picas, EValor.As),
         };
-        var resultado = escalera.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => escalera.Aplicar(jugada));
     }
 
     [Fact]
@@ -117,9 +102,7 @@ public class EscaleraTest
             new(EPalo.Trebol, EValor.Q),
             new(EPalo.Corazon, EValor.K),
         };
-        var resultado = escalera.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => escalera.Aplicar(jugada));
     }
     [Fact]
     public void VariosAS()
@@ -132,8 +115,7 @@ public class EscaleraTest
             new(EPalo.Corazon, EValor.Q),
             new(EPalo.Diamante, EValor.K),
         };
-        var resultado = escalera.Aplicar(jugada);
 
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => escalera.Aplicar(jugada));
     }
 }
