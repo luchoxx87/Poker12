@@ -10,7 +10,9 @@ public abstract class JugadaAbs : IJugada
     protected JugadaAbs(string nombre, byte prioridad, JugadaAbs? siguiente = null)
         => (Nombre, Prioridad, _siguiente) = (nombre, prioridad, siguiente);
     public Resultado Cero => new Resultado(Prioridad);
+    
     public Resultado ResultadoCon(byte valor) => new Resultado(Prioridad, valor);
+
     public Resultado Aplicar(List<Carta> cartas)
     {
         if (cartas.Count < CantidadCartas)
@@ -18,6 +20,7 @@ public abstract class JugadaAbs : IJugada
         var cartasJugada = new CartasJugada(cartas);
         return Aplicar(cartasJugada);
     }
+
     protected virtual Resultado Aplicar(CartasJugada cartas)
     {
         //Por defecto lo delega al siguiente
