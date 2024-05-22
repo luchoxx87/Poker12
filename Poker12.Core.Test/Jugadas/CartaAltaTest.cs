@@ -21,7 +21,9 @@ public class CartaAltaTest
         {
             new(EPalo.Corazon, EValor.Diez),
             new(EPalo.Picas, EValor.As),
-            new(EPalo.Corazon, EValor.Tres)
+            new(EPalo.Corazon, EValor.Tres),
+            new(EPalo.Trebol, EValor.Dos),
+            new(EPalo.Picas, EValor.Dos)
         };
 
         var resultado = _cartaAlta.Aplicar(jugada);
@@ -30,15 +32,17 @@ public class CartaAltaTest
     }
 
     [Theory]
-    [InlineData(EValor.Dos)]
-    [InlineData(EValor.Cinco)]
+    [InlineData(EValor.Seis)]
+    [InlineData(EValor.Ocho)]
     [InlineData(EValor.J)]
-    public void CasoTrivialUnaCarta(EValor valor)
+    public void TeoriaMayor(EValor valor)
     {
         var jugada = new List<Carta>()
         {
             new(EPalo.Corazon, valor)
         };
+        for (byte i = 2; i <= 5; i++)
+            jugada.Add(new Carta(EPalo.Corazon, (EValor)i));
 
         var resultado = _cartaAlta.Aplicar(jugada);
 
