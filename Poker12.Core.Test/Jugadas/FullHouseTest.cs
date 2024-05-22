@@ -41,9 +41,7 @@ public class FullHouseTest
             new(EPalo.Corazon, EValor.As)
         };
 
-        var resultado = _FullHouse.Aplicar(jugada);
-
-        Assert.Throws<ArgumentException>(()=> _FullHouse.Aplicar(jugada));
+        Assert.Throws<InvalidOperationException>(()=> _FullHouse.Aplicar(jugada));
     }
     [Fact]
     public void PruebaConCincos()
