@@ -43,7 +43,7 @@ public class FullHouseTest
 
         var resultado = _FullHouse.Aplicar(jugada);
 
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<ArgumentException>(()=> _FullHouse.Aplicar(jugada));
     }
     [Fact]
     public void PruebaConCincos()
