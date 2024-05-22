@@ -56,8 +56,7 @@ public class ColorTest
             new(EPalo.Corazon, EValor.Tres),
             new(EPalo.Corazon, EValor.Dos),
         };
-        var resultado = color.Aplicar(jugada);
 
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => color.Aplicar(jugada));
     }
 }
