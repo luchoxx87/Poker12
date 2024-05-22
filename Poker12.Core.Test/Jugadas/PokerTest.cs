@@ -58,8 +58,6 @@ public class PokerTest
             new(EPalo.Diamante, EValor.As)
         };
 
-        var resultado = _Poker.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => _Poker.Aplicar(jugada));
     }
 }
