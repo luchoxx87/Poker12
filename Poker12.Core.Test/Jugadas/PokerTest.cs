@@ -3,8 +3,8 @@ using Poker12.Core.Jugadas;
 namespace Poker12.Core.Test.Jugadas;
 public class PokerTest
 {
-    private IJugada _Poker;
-    public PokerTest() => _Poker = new Poker();
+    private JugadaAbs _Poker;
+    public PokerTest() => _Poker = new Poker("Poker",3);
 
     [Fact]
     public void FallaPorJugadaSinCartas()
@@ -38,8 +38,8 @@ public class PokerTest
             new(EPalo.Corazon, EValor.As),
             new(EPalo.Picas, EValor.As),
             new(EPalo.Diamante, EValor.As),
-            new(EPalo.Trebol, EValor.Dos),
-            new(EPalo.Diamante, EValor.As)
+            new(EPalo.Trebol, EValor.As),
+            new(EPalo.Diamante, EValor.Dos)
         };
 
         var resultado = _Poker.Aplicar(jugada);
@@ -58,8 +58,6 @@ public class PokerTest
             new(EPalo.Diamante, EValor.As)
         };
 
-        var resultado = _Poker.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => _Poker.Aplicar(jugada));
     }
 }

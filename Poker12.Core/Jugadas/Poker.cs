@@ -1,40 +1,15 @@
 namespace Poker12.Core.Jugadas;
-public class Poker : IJugada
+public class Poker : JugadaAbs
 {
-    public string Nombre => "Poker";
-    public byte Prioridad => 3;
-    public Resultado Aplicar(List<Carta> cartas)
+    public Poker(string nombre, byte prioridad) : base("Poker", 3)
     {
-        if (cartas.Count == 0)
-            throw new ArgumentException("No hay cartas");
-        if (cartas.Count != 5)
-            throw new ArgumentException("Tienen que ser 5 cartas para jugar al poker flaco");
-
-        var numeros = cartas.
-                        Select(c => (byte)c.Valor).
-                        ToList();
-
-        // Para obtener los números únicos
-        var numerosDistintos = numeros.Distinct();
-
-        // Para obtener la cantidad de números distintos
-        int cantidadNumerosDistintos = numerosDistintos.Count();
-
-        // Agrupar los números repetidos
-        var numerosRepetidos = numeros.GroupBy(x => x)
-                                        .Where(group => group.Count() > 1)
-                                        .Select(group => group.Key)
-                                        .ToList();
-
-        var valor = numerosRepetidos[0];
-
-        if (valor == 1)
-            valor = 14;
-
-        if (numerosRepetidos.Count == 1 && cantidadNumerosDistintos == 2)
-
-            return new Resultado(Prioridad, valor);
-        else 
-            return new Resultado(Prioridad,0);
+    }
+    protected override Resultado Aplicar(CartasJugada cartas)
+    {
+        var valorCon4 = cartas.MayorValorConNCartas(4);
+        if (valorCon4 != 0 )
+        return ResultadoCon(valorCon4);
+        
+        return base.Aplicar(cartas);
     }
 }
