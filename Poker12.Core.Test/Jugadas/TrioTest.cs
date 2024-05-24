@@ -36,8 +36,8 @@ namespace Poker12.Core.Test.Jugadas
                 new(EPalo.Corazon, EValor.Cinco),
                 new(EPalo.Corazon, EValor.Cinco)
             };
-            var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal(0, resultado.Valor); 
+            Assert.Throws<InvalidOperationException>(() => _trioColor.Aplicar(jugada));
+
         }
     }
 }
