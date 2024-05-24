@@ -1,8 +1,9 @@
 namespace Poker12.Core.Jugadas;
-public class Trio : IJugada
+public class Trio : JugadaAbs
 {
-    public string Nombre => "Trio Color";
-    public byte Prioridad => 7; 
+    public Trio(string nombre, byte prioridad, JugadaAbs? siguiente = null) : base(nombre, prioridad, siguiente)
+    {
+    }
     public Resultado Aplicar(List<Carta> cartas)
     {
         if (cartas.Count < 3)
@@ -14,5 +15,12 @@ public class Trio : IJugada
             return new Resultado(Prioridad, highestValue == EValor.As? (byte)14 : (byte)highestValue);
         }
         return new Resultado(Prioridad, 0); 
+    }
+
+    protected override Resultado Aplicar(CartasJugada cartas)
+    {
+        
+
+        return base.Aplicar(cartas);
     }
 }
