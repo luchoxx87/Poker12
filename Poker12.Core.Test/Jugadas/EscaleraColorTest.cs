@@ -16,24 +16,24 @@ public class EscaleraColorTest
     }
 
     [Fact]
-    public void PruebaEscaleraColorConAs()
+    public void GanarEscaleraColorConAs()
     {
         var jugada = new List<Carta>()
         {
-            new(EPalo.Picas, EValor.Cuatro),
             new(EPalo.Picas, EValor.Cinco),
-            new(EPalo.Picas, EValor.Seis),
-            new(EPalo.Picas, EValor.Siete),
+            new(EPalo.Picas, EValor.Tres),
+            new(EPalo.Picas, EValor.Cuatro),
+            new(EPalo.Picas, EValor.Dos),
             new(EPalo.Picas, EValor.As),
         };
 
         var resultado = _escaleraColor.Aplicar(jugada);
 
-        Assert.Equal(0, resultado.Valor);
+        Assert.Equal(5, resultado.Valor);
     }
 
     [Fact]
-    public void GanarEscaleraColor()
+    public void GanarEscaleraColorSinAs()
     {
         var jugada = new List<Carta>()
         {
@@ -61,8 +61,6 @@ public class EscaleraColorTest
             new(EPalo.Picas, EValor.Nueve),
         };
 
-        var resultado = _escaleraColor.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(() => _escaleraColor.Aplicar(jugada));
     }
 }

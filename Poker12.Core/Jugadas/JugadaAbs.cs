@@ -27,3 +27,4 @@ public abstract class JugadaAbs : IJugada
         return _siguiente.Aplicar(cartas);
     }
 }
+ 
