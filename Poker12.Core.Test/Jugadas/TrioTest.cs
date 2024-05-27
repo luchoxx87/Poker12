@@ -3,30 +3,44 @@ namespace Poker12.Core.Test.Jugadas
 {
     public class TrioTest
     {
-        private IJugada _trioColor;
-        public TrioTest() => _trioColor = new Trio();
+        private IJugada _trio;
+        public TrioTest() => _trio = new Trio();
         [Fact]
         public void FallaPorMenosDeTresCartas()
         {
             var jugada = new List<Carta>();
-            Assert.Throws<ArgumentException>(() => _trioColor.Aplicar(jugada));
+            Assert.Throws<ArgumentException>(() => _trio.Aplicar(jugada));
         }
         [Fact]
-        public void CorrectoTrioColor()
+        public void CorrectoTrioConAs()
         {
             var jugada = new List<Carta>
             {
                 new(EPalo.Picas, EValor.As),
-                new(EPalo.Trebol, EValor.As),
-                new(EPalo.Corazon, EValor.As),
+                new(EPalo.Picas, EValor.As),
+                new(EPalo.Picas, EValor.As),
                 new(EPalo.Diamante, EValor.Siete),
                 new(EPalo.Picas, EValor.Cuatro)
             };
-            var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal(14, resultado.Valor); 
+            var resultado = _trio.Aplicar(jugada);
+            Assert.Equal(14, resultado.Valor);
         }
         [Fact]
-        public void IncorrectoTrioColor()
+        public void CorrectoTrio()
+        {
+            var jugada = new List<Carta>
+            {
+                new(EPalo.Picas, EValor.K),
+                new(EPalo.Picas, EValor.K),
+                new(EPalo.Picas, EValor.K),
+                new(EPalo.Diamante, EValor.Siete),
+                new(EPalo.Picas, EValor.Cuatro)
+            };
+            var resultado = _trio.Aplicar(jugada);
+            Assert.Equal(13, resultado.Valor); 
+        }
+        [Fact]
+        public void IncorrectoTrio()
         {
             var jugada = new List<Carta>
             {
@@ -36,8 +50,23 @@ namespace Poker12.Core.Test.Jugadas
                 new(EPalo.Corazon, EValor.Cinco),
                 new(EPalo.Corazon, EValor.Cinco)
             };
-            var resultado = _trioColor.Aplicar(jugada);
-            Assert.Equal(0, resultado.Valor); 
+            Assert.Throws<InvalidOperationException>(() => _trio.Aplicar(jugada));
+        }
+        [Fact]
+        public void IncorrectoTrio2()
+        {
+            var jugada = new List<Carta>
+            {
+                new(EPalo.Corazon, EValor.K),
+                new(EPalo.Diamante, EValor.Seis),
+                new(EPalo.Picas, EValor.Ocho),
+                new(EPalo.Corazon, EValor.Cinco),
+                new(EPalo.Corazon, EValor.Cinco)
+            };
+            Assert.Throws<InvalidOperationException>(() => _trio.Aplicar(jugada));
         }
     }
 }
+
+
+

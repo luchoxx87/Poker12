@@ -5,7 +5,6 @@ namespace Poker12.Core.Test.Jugadas
     {
         private IJugada _doblePar;
         public DobleParTest() => _doblePar = new DoblePar();
-
         [Fact]
         public void FallaPorMenosDeCuatroCartas()
         {
@@ -13,32 +12,60 @@ namespace Poker12.Core.Test.Jugadas
             Assert.Throws<ArgumentException>(() => _doblePar.Aplicar(jugada));
         }
         [Fact]
-        public void CorrectoDobleParDelMismoRango()
+        public void CorrectoDobleParConAs()
         {
             var jugada = new List<Carta>
             {
-                new(EPalo.Picas, EValor.K),
-                new(EPalo.Picas, EValor.K),
+                new(EPalo.Picas, EValor.Siete),
+                new(EPalo.Picas, EValor.Siete),
                 new(EPalo.Corazon, EValor.Seis),
-                new(EPalo.Picas, EValor.Seis),
-                new(EPalo.Trebol, EValor.Siete),
+                new(EPalo.Picas, EValor.As),
+                new(EPalo.Trebol, EValor.As),
             };
             var resultado = _doblePar.Aplicar(jugada);
-            Assert.Equal(13, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
+            Assert.Equal(14, resultado.Valor);
         }
         [Fact]
-        public void IncorrectoDobleParDelMismoRango()
+        public void CorrectoPruebaDoblePar()
+        {
+            var jugada = new List<Carta>()
+        {
+            new(EPalo.Picas, EValor.Q),
+            new(EPalo.Picas, EValor.Q),
+            new(EPalo.Trebol, EValor.Seis),
+            new(EPalo.Trebol, EValor.Seis),
+            new(EPalo.Corazon, EValor.Cinco),
+        };
+            var resultado = _doblePar.Aplicar(jugada);
+
+            Assert.Equal(6, resultado.Valor);
+        }
+        [Fact]
+        public void IncorrectoDoblePar()
         {
             var jugada = new List<Carta>
             {
                 new(EPalo.Corazon, EValor.Tres),
                 new(EPalo.Picas, EValor.Tres),
                 new(EPalo.Corazon, EValor.Seis),
-                new(EPalo.Picas, EValor.Seis),
+                new(EPalo.Picas, EValor.Cinco),
                 new(EPalo.Corazon, EValor.Ocho)
             };
-            var resultado = _doblePar.Aplicar(jugada);
-            Assert.Equal(6, resultado.Valor);
+            Assert.Throws<InvalidOperationException>(() => _doblePar.Aplicar(jugada));
+        }
+        
+        [Fact]
+        public void IncorrectoPruebaDoblePar()
+        {
+            var jugada = new List<Carta>()
+    {
+        new(EPalo.Picas, EValor.As),
+        new(EPalo.Picas, EValor.As),
+        new(EPalo.Trebol, EValor.Seis),
+        new(EPalo.Trebol, EValor.Seis),
+        new(EPalo.Corazon, EValor.Seis),
+    };
+            Assert.Throws<InvalidOperationException>(() => _doblePar.Aplicar(jugada));
         }
     }
 }
