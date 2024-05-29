@@ -5,8 +5,10 @@ public class Trio : JugadaAbs
     
     protected override Resultado Aplicar(CartasJugada cartas)
     {
-        if(cartas.AgrupadasPorValor.Count==4)
-        return ResultadoCon(cartas.MayorValorAbsoluto);
-            return base.Aplicar(cartas);
+        var valorTrio = cartas.MayorValorConNCartas(3);
+        if(valorTrio != 0)
+            return ResultadoCon(valorTrio);
+        
+        return base.Aplicar(cartas);
     }
 }
