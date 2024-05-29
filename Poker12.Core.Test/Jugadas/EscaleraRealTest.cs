@@ -33,19 +33,32 @@ public class EscaleraRealTest
     }
 
     [Fact]
-    public void FallarEscaleraReal()
+    public void FallarEscaleraRealSinAs()
     {
         var jugada = new List<Carta>()
         {
-            new(EPalo.Trebol, EValor.As),
+            new(EPalo.Trebol, EValor.Nueve),
             new(EPalo.Trebol, EValor.Diez),
             new(EPalo.Trebol, EValor.J),
             new(EPalo.Trebol, EValor.Dos),
             new(EPalo.Trebol, EValor.K)
         };
+        
+        Assert.Throws<InvalidOperationException>(() => _escaleraReal.Aplicar(jugada));
+    }
 
-        var resultado = _escaleraReal.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+    [Fact]
+    public void FallarEscaleraReal()
+    {
+        var jugada = new List<Carta>()
+        {
+            new(EPalo.Trebol, EValor.Tres),
+            new(EPalo.Trebol, EValor.Cuatro),
+            new(EPalo.Trebol, EValor.Cinco),
+            new(EPalo.Trebol, EValor.Seis),
+            new(EPalo.Trebol, EValor.Siete)
+        };
+        
+        Assert.Throws<InvalidOperationException>(() => _escaleraReal.Aplicar(jugada));
     }
 }
