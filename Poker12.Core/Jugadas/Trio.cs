@@ -10,5 +10,6 @@ public class Trio : JugadaAbs
             return ResultadoCon(valorTrio);
         
         return base.Aplicar(cartas);
+        
     }
 }
