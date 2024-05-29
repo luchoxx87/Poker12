@@ -1,44 +1,55 @@
+using Microsoft.VisualBasic;
 using Poker12.Core.Jugadas;
-namespace Poker12.Core.Test.Jugadas
+namespace Poker12.Core.Test.Jugadas;
+public class DobleParTest
 {
-    public class DobleParTest
+    private IJugada doblePar;
+    public DobleParTest() => doblePar = new DoblePar();
+    [Fact]
+    public void FallaPorJugadaSinCartas()
     {
-        private IJugada _doblePar;
-        public DobleParTest() => _doblePar = new DoblePar();
-
-        [Fact]
-        public void FallaPorMenosDeCuatroCartas()
+        var jugada = new List<Carta>();
+        Assert.Throws<ArgumentException>(() => doblePar.Aplicar(jugada));
+    }
+    [Fact]
+    public void ProbandoDobleParConAs()
+    {
+        var jugada = new List<Carta>()
         {
-            var jugada = new List<Carta>();
-            Assert.Throws<ArgumentException>(() => _doblePar.Aplicar(jugada));
-        }
-        [Fact]
-        public void CorrectoDobleParDelMismoRango()
+            new(EPalo.Trebol, EValor.As),
+            new(EPalo.Diamante, EValor.As),
+            new(EPalo.Corazon, EValor.Tres),
+            new(EPalo.Diamante, EValor.Tres),
+            new(EPalo.Corazon, EValor.Cinco),
+        };
+        var resultado = doblePar.Aplicar(jugada);
+        Assert.Equal(143, resultado.Valor); 
+    }
+    [Fact]
+    public void ProbandoDoblePar()
+    {
+        var jugada = new List<Carta>()
         {
-            var jugada = new List<Carta>
-            {
-                new(EPalo.Picas, EValor.K),
-                new(EPalo.Picas, EValor.K),
-                new(EPalo.Corazon, EValor.Seis),
-                new(EPalo.Picas, EValor.Seis),
-                new(EPalo.Trebol, EValor.Siete),
-            };
-            var resultado = _doblePar.Aplicar(jugada);
-            Assert.Equal(13, resultado.Valor); // Esperamos que el valor más alto entre los pares sea 6
-        }
-        [Fact]
-        public void IncorrectoDobleParDelMismoRango()
+            new(EPalo.Trebol, EValor.Cuatro),
+            new(EPalo.Diamante, EValor.Cuatro),
+            new(EPalo.Corazon, EValor.Tres),
+            new(EPalo.Diamante, EValor.Tres),
+            new(EPalo.Corazon, EValor.Cinco),
+        };
+        var resultado = doblePar.Aplicar(jugada);
+        Assert.Equal(34, resultado.Valor); 
+    }
+    [Fact]
+    public void FormaIncorrectaDePruebaDoblePar()
+    {
+        var jugada = new List<Carta>()
         {
-            var jugada = new List<Carta>
-            {
-                new(EPalo.Corazon, EValor.Tres),
-                new(EPalo.Picas, EValor.Tres),
-                new(EPalo.Corazon, EValor.Seis),
-                new(EPalo.Picas, EValor.Seis),
-                new(EPalo.Corazon, EValor.Ocho)
-            };
-            var resultado = _doblePar.Aplicar(jugada);
-            Assert.Equal(6, resultado.Valor);
-        }
+            new(EPalo.Trebol, EValor.As),
+            new(EPalo.Corazon, EValor.K),
+            new(EPalo.Corazon, EValor.Cinco),
+            new(EPalo.Corazon, EValor.Ocho),
+            new(EPalo.Corazon, EValor.Siete),
+        };
+        Assert.Throws<InvalidOperationException>(() => doblePar.Aplicar(jugada));
     }
 }
