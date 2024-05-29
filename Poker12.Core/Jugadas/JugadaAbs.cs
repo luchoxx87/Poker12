@@ -9,7 +9,7 @@ public abstract class JugadaAbs : IJugada
     public byte Prioridad { get; init; }
     protected JugadaAbs(string nombre, byte prioridad, JugadaAbs? siguiente = null)
         => (Nombre, Prioridad, _siguiente) = (nombre, prioridad, siguiente);
-    public Resultado Cero => new Resultado(Prioridad);
+    public Resultado Cero => new Resultado(Prioridad);    
     public Resultado ResultadoCon(byte valor) => new Resultado(Prioridad, valor);
     public Resultado Aplicar(List<Carta> cartas)
     {

@@ -3,8 +3,8 @@ using Poker12.Core.Jugadas;
 namespace Poker12.Core.Test.Jugadas;
 public class FullHouseTest
 {
-    private IJugada _FullHouse;
-    public FullHouseTest() => _FullHouse = new FullHouse();
+    private JugadaAbs _FullHouse;
+    public FullHouseTest() => _FullHouse = new FullHouse("FullHouse", 4);
 
     [Fact]
     public void FallaPorJugadaSinCartas()
@@ -41,9 +41,7 @@ public class FullHouseTest
             new(EPalo.Corazon, EValor.As)
         };
 
-        var resultado = _FullHouse.Aplicar(jugada);
-
-        Assert.Equal(0, resultado.Valor);
+        Assert.Throws<InvalidOperationException>(()=> _FullHouse.Aplicar(jugada));
     }
     [Fact]
     public void PruebaConCincos()
