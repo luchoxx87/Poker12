@@ -1,20 +1,24 @@
-namespace Poker12.Core.Jugadas;
-public class DoblePar : JugadaAbs
+using Poker12.Core.Jugadas;
+namespace Poker12.Core.Jugadas
 {
-    public DoblePar() : base("Doble Par", 7) { }
-    protected override Resultado Aplicar(CartasJugada cartas)
+    public class DoblePar : JugadaAbs
     {
-        var grupos = cartas.AgrupadasPorValor;
-        var conteoPares = grupos.Where(g => g.Value.Count == 2).Count();
-        if (conteoPares == 2)
+        public DoblePar() : base("Doble Par", 8) { }
+        protected override Resultado Aplicar(CartasJugada cartas)
         {
-            var valor1 = grupos.First(g => g.Value.Count == 2).Key == EValor.As? (byte)14 : (byte)grupos.First(g => g.Value.Count == 2).Key;
-            var valor2 = grupos.FirstOrDefault(g => g.Value.Count == 2).Key == EValor.As? (byte)14 : (byte)grupos.FirstOrDefault(g => g.Value.Count == 2).Key;
-            return ResultadoCon(Math.Max(valor1, valor2));
-        }
-        else
-        {
-            throw new InvalidOperationException("No se encontraron exactamente dos pares.");
+            var gruposCon2 = cartas.AgrupadasPorValor
+                .Where(g => g.Value.Count == 2)
+                .Select(g => g.Key)
+                .Order();
+            
+            if (gruposCon2.Count() != 2)
+                return base.Aplicar(cartas);
+            
+            int valor = gruposCon2.First() == EValor.As ?
+                            14 * 10 + (int)gruposCon2.Last() :
+                            (int)gruposCon2.First() * 10 + (int)gruposCon2.Last() ;
+
+            return ResultadoCon((byte)valor);
         }
     }
 }
