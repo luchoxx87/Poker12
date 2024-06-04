@@ -29,23 +29,35 @@ namespace MyBenchmarks
 
         public IEnumerable<IJugada> CrearJugadas(List<Carta> cartas)
         {
-            var jugada = new List<Carta>()
-        {
-            new(EPalo.Corazon, EValor.Diez),
-            new(EPalo.Corazon, EValor.As),
-            new(EPalo.Corazon, EValor.Cinco),
-            new(EPalo.Corazon, EValor.Tres),
-            new(EPalo.Corazon, EValor.Dos),
-        };
-
-        }
-        public Resultado ObtenerResultado()
-        {
-            var jugadas = CrearJugadas();
-            // Crear una lsita de cartas (5), cuyo unica jugada aplicable es carta alta
+            return new List<IJugada>
             {
-                
+                new CartaAlta(),
+                new Color(),
+                new DoblePar(),
+                new EscaleraReal(),
+                new EscaleraColor(),
+                new Escalera(),
+                new FullHouse(),
+                new Pareja(),
+                new Trio()
+            };
+        }
+        public Resultado ObtenerResultado(List<Carta>cartas)
+        {
+            var jugadas = CrearJugadas(cartas);
+            var resultados = new List<Resultado>();
+
+            foreach (var jugada in jugadas)
+            {
+                var resultado = jugada.Aplicar(cartas);
+                if (resultado.Prioridad > 0)
+                {
+                    resultados.Add(resultado);
+                }
             }
+
+            return resultados.OrderByDescending(r => r.Prioridad).ThenByDescending(r => r.Valor).FirstOrDefault();
+
         }
     }
 
