@@ -23,4 +23,8 @@ public class Jugador
     }
     public void AcreditarFichas(ushort FichasMesa)
     =>Fichas+=FichasMesa;
+
+    public void Jugarresto()
+    =>Fichas=0;
+    
 }
