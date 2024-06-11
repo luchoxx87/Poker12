@@ -1,5 +1,4 @@
 namespace Poker12.Core.ColeccionesCartas;
-
 public class NoMezcla : IMezclador
 {
     public void MezclarCartas(IEnumerable<Carta> Cartas)
