@@ -15,10 +15,10 @@ classDiagram
         Carta : Carta1
         Carta : Carta2
         ushort : Fichas
-        Jugadores : PuedeApostar(Monto) bool
-        Jugadores : ApostarResto()
-        Jugadores : Retirarse()
-        Jugadores : Apostar(int Dinero)
+        PuedeApostar(Monto) bool
+        ApostarResto()
+        Retirarse()
+        Apostar(int Dinero)
     }
 
     class IMezclador{
@@ -32,10 +32,10 @@ classDiagram
 
     class CartasMesa{
         bocaArriba:List~Carta~
-        CartasMesa : DarVuelta() Carta
+        DarVuelta() Carta
     }
 
-    class Mesa{
+    class Ronda{
         ushort : ApuestaInicial
         ushort : ApuestaTotal
         jugadores: List~Jugador~
@@ -46,8 +46,11 @@ classDiagram
 
     class ConPilaCartas{
         ~ Stack~Carta~ Pila
-        ConPilaCartas : ~ ConPilaCartas(IEnumerable~Carta~)
+        ~ ConPilaCartas(IEnumerable~Carta~)
     }
 
 
 ```
+
+Motor conoce una mesa,
+ronda es mesa 
