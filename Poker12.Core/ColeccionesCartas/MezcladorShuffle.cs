@@ -3,12 +3,10 @@ namespace Poker12.Core.ColeccionesCartas;
 
 public class MezcladorShuffle : IMezclador
 {
-    public IEnumerable<Carta> MezclarCartas(IEnumerable<Carta> Cartas)
+    public void MezclarCartas(IEnumerable<Carta> Cartas)
     {
         var rmd = new Random();
-        var cartasMezclado = Cartas.OrderBy(x => rmd.Next());
-
-        return cartasMezclado;
+        Cartas = Cartas.OrderBy(x => rmd.Next());
     }
 
     public IEnumerable<Carta> ObtenerCartas()

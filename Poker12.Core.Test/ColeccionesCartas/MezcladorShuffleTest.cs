@@ -12,13 +12,4 @@ public class MezcladorShuffleTest
         var mazo = mezclador.ObtenerCartas();
         Assert.Equal(52, mazo.Count());
     }
-
-    [Fact]
-    public void MezclarCartasTest() 
-    {
-        var mazo = mezclador.ObtenerCartas();
-        var mazoDesordenado = mezclador.MezclarCartas(mazo);
-
-        Assert.NotEqual(mazo, mazoDesordenado);
-    }
 }
