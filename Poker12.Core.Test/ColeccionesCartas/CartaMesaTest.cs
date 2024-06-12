@@ -5,7 +5,7 @@ public class CartaMesaTest
 {
     private readonly NoMezcla nomezcla = new();
     [Fact]
-    public void Test1()
+    public void DarVueltaOK()
     {
         Mazo mazo = new(nomezcla.ObtenerCartas());
         CartaMesa cartaMesa = new(mazo.Cartas);
@@ -14,4 +14,16 @@ public class CartaMesaTest
         cartaMesa.DarVuelta();
     Assert.Equal(2, cartaMesa.BocaArriba.Count);
     }
+    [Fact]
+    public void DarVueltaFalla()
+    {
+        Mazo mazo = new(nomezcla.ObtenerCartas());
+        CartaMesa cartaMesa = new(mazo.Cartas);
+        nomezcla.MezclarCartas(mazo.Cartas);
+        cartaMesa.DarVuelta();
+        cartaMesa.DarVuelta();
+        cartaMesa.DarVuelta();
+    Assert.NotEqual(2, cartaMesa.BocaArriba.Count);
+    }
+
 }
