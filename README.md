@@ -8,20 +8,20 @@ classDiagram
     Mazo --* Mesa
     Mesa --* IMezclador
     Jugadores --o Mesa
-    Jugadores : PuedeApostar(Monto)
+    Jugadores : PuedeApostar(Monto) bool
     Jugadores : ApostarResto()
     Jugadores : Retirarse()
     Jugadores : Apostar(int Dinero)
-    ConPilaCartas : ConPilaCartas(IEnumerable<Carta>)
-    CartasMesa : DarVuelta()
+    ConPilaCartas : ~ ConPilaCartas(IEnumerable<Carta>)
+    CartasMesa : DarVuelta() Carta
     Mazo : Sacar()
 
 
     class Jugadores{
         string Nombre
-        int Carta1:Carta
-        int Carta2:Carta
-        int Fichas:UShort
+        Carta : Carta1
+        Carta : Carta2
+        UShort : Fichas
     }
 
     class IMezclador{
@@ -33,20 +33,20 @@ classDiagram
     }
 
     class CartasMesa{
-        int bocaArriba:List<Carta>
+        bocaArriba:List~Carta~
     }
 
     class Mesa{
-        int ApuestaI
-        int ApuestaT
-        int ListaJ<Jugadores>
-        int Mazo
-        int CartasMesa
-        int ListaApostadores<Jugadores>
+        UShort : ApuestaInicial
+        UShort : ApuestaTotal
+        jugadores: List~Jugador~
+        Mazo : Mazo
+        CartasMesa : CartasMesa
+        Apostadores : List~Jugadores~
     }
 
     class ConPilaCartas{
-        int Pila:Stack<Carta>
+        ~ Stack~Carta~ Pila
     }
 
 
