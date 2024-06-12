@@ -8,37 +8,36 @@ classDiagram
     Mazo --* Mesa
     Mesa --* IMezclador
     Jugadores --o Mesa
-    Jugadores : PuedeApostar(Monto) bool
-    Jugadores : ApostarResto()
-    Jugadores : Retirarse()
-    Jugadores : Apostar(int Dinero)
-    ConPilaCartas : ~ ConPilaCartas(IEnumerable<Carta>)
-    CartasMesa : DarVuelta() Carta
-    Mazo : Sacar()
 
 
     class Jugadores{
         string Nombre
         Carta : Carta1
         Carta : Carta2
-        UShort : Fichas
+        ushort : Fichas
+        Jugadores : PuedeApostar(Monto) bool
+        Jugadores : ApostarResto()
+        Jugadores : Retirarse()
+        Jugadores : Apostar(int Dinero)
     }
 
     class IMezclador{
-
+        ObtenerCartas() IEnumerable~Carta~
+        Mezclar (IEnumerable~Carta~)
     }
 
     class Mazo{
-
+        Sacar() Carta
     }
 
     class CartasMesa{
         bocaArriba:List~Carta~
+        CartasMesa : DarVuelta() Carta
     }
 
     class Mesa{
-        UShort : ApuestaInicial
-        UShort : ApuestaTotal
+        ushort : ApuestaInicial
+        ushort : ApuestaTotal
         jugadores: List~Jugador~
         Mazo : Mazo
         CartasMesa : CartasMesa
@@ -47,6 +46,7 @@ classDiagram
 
     class ConPilaCartas{
         ~ Stack~Carta~ Pila
+        ConPilaCartas : ~ ConPilaCartas(IEnumerable~Carta~)
     }
 
 
