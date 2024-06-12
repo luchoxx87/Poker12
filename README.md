@@ -53,4 +53,5 @@ classDiagram
 ```
 
 Motor conoce una mesa,
-ronda es mesa 
+ronda es mesa,
+Hacer los cambios de josbert.
