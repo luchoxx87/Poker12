@@ -4,10 +4,10 @@ classDiagram
 
     ConPilaCartas <|-- CartasMesa
     ConPilaCartas <|-- Mazo
-    CartasMesa --* Mesa
-    Mazo --* Mesa
-    Mesa --* IMezclador
-    Jugadores --o Mesa
+    CartasMesa --* Ronda
+    Mazo --* Ronda
+    Ronda --* IMezclador
+    Jugadores --o Ronda
 
 
     class Jugadores{
@@ -16,9 +16,9 @@ classDiagram
         Carta : Carta2
         ushort : Fichas
         PuedeApostar(Monto) bool
-        ApostarResto()
-        Retirarse()
-        Apostar(int Dinero)
+        SacarFichas(Monto)
+        AcreditarFichas(Monto)
+        JugarResto()
     }
 
     class IMezclador{
