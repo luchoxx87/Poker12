@@ -11,16 +11,14 @@ public class MezcladorShuffle : IMezclador
 
     public IEnumerable<Carta> ObtenerCartas()
     {
-        List<Carta> cartas = new List<Carta>();
-
-        foreach (EPalo palo in Enum.GetValues<EPalo>())
+        List<Carta> Mazo = [];
+        foreach (var palos in Enum.GetValues<EPalo>())
         {
-            foreach (EValor valor in Enum.GetValues<EValor>())
+            foreach (var valores in Enum.GetValues<EValor>())
             {
-                cartas.Add(new Carta(palo, valor));
+                Mazo.Add(new(palos, valores));
             }
         }
-
-        return cartas;
+        return Mazo;
     }
 }
