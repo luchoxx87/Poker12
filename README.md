@@ -4,21 +4,21 @@ classDiagram
 
     ConPilaCartas <|-- CartasMesa
     ConPilaCartas <|-- Mazo
-    CartasMesa --* Mesa
-    Mazo --* Mesa
-    Mesa --* IMezclador
-    Jugadores --o Mesa
+    CartasMesa --* Ronda
+    Mazo --* Ronda
+    Ronda --* IMezclador
+    Jugadores --o Ronda
 
 
     class Jugadores{
         string Nombre
-        Carta : Carta1
-        Carta : Carta2
-        ushort : Fichas
-        Jugadores : PuedeApostar(Monto) bool
-        Jugadores : ApostarResto()
-        Jugadores : Retirarse()
-        Jugadores : Apostar(int Dinero)
+        Carta Carta1
+        Carta Carta2
+        ushort Fichas
+        PuedeApostar(Monto) bool
+        SacarFichas(Monto)
+        AcreditarFichas(Monto)
+        JugarResto()
     }
 
     class IMezclador{
@@ -31,23 +31,27 @@ classDiagram
     }
 
     class CartasMesa{
-        bocaArriba:List~Carta~
-        CartasMesa : DarVuelta() Carta
+        List~Carta~ bocaArriba
+        DarVuelta() Carta
     }
 
-    class Mesa{
-        ushort : ApuestaInicial
-        ushort : ApuestaTotal
-        jugadores: List~Jugador~
-        Mazo : Mazo
-        CartasMesa : CartasMesa
-        Apostadores : List~Jugadores~
+    class Ronda{
+        ushort ApuestaInicial
+        ushort ApuestaTotal
+        jugadores List~Jugador~
+        Mazo Mazo
+        CartasMesa CartasMesa
+        Apostadores List~Jugadores~
     }
 
     class ConPilaCartas{
         ~ Stack~Carta~ Pila
-        ConPilaCartas : ~ ConPilaCartas(IEnumerable~Carta~)
+        ~ ConPilaCartas(IEnumerable~Carta~)
     }
 
 
 ```
+
+Motor conoce una mesa,
+ronda es mesa,
+Hacer los cambios de josbert.
