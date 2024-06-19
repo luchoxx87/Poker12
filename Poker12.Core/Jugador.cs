@@ -6,6 +6,7 @@ public class Jugador
     public Carta? carta1 { get; set; }
     public Carta? carta2 { get; set; }
     public ushort Fichas { get; private set; }
+    public bool Activo { get; set; } = true;
 
     public Jugador(string Nombre, ushort Fichas)
     {
@@ -18,13 +19,12 @@ public class Jugador
     {
         if (!PuedeApostar(FichasMesa))
             throw new InvalidOperationException();
-            
-        Fichas-=FichasMesa;
+
+        Fichas -= FichasMesa;
     }
     public void AcreditarFichas(ushort FichasMesa)
-    =>Fichas+=FichasMesa;
+    => Fichas += FichasMesa;
 
     public void Jugarresto()
-    =>Fichas=0;
-    
+    => Fichas = 0;
 }
