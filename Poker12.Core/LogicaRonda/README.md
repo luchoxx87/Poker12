@@ -15,6 +15,35 @@ classDiagram
         + Ejecutar()
     }
     RespuestaJugadorARonda <|-- Retirarse
+
+    class ApostarTodo{
+        + Ejecutar()
+    }
+
+    class MantenerApuesta{
+        + Ejecutar()
+    }
+
+    class SubirApuesta{
+        + Ejecutar()
+    }
+    RespuestaJugadorARonda <|-- ApostarTodo
+    RespuestaJugadorARonda <|-- MantenerApuesta
+    RespuestaJugadorARonda <|-- SubirApuesta
 ```
 
-//ApostarTodo - MantenerApuesta - SubirApuesta //
+#### Secuencia para Retirarse
+
+```mermaid
+sequenceDiagram
+    participant Ronda
+    participant Retirarse
+    participant Jugador
+
+    Ronda ->> Retirarse: Ejecutar()
+
+    Retirarse ->> Jugador: Retirarse()
+    Jugador -->> Retirarse: ""
+    Retirarse -->> Ronda: ""
+
+```
