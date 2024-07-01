@@ -24,4 +24,13 @@ public class Motor : IDisposable
 
     public void SacarJugador(Jugador jugador)
         => jugador.Activo = false;
+    public void Premiar(Jugador jugador, ushort fichas)
+        => jugador.AcreditarFichas(fichas);
+    public int IncrementarIndiceMano()
+    {
+        IndiceMano = IndiceMano == Jugadores.Count
+            ? 0
+            : IndiceMano + 1;
+        return IndiceMano;
+    }
 }
