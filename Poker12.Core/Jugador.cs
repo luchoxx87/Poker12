@@ -1,5 +1,4 @@
 namespace Poker12.Core;
-
 public class Jugador
 {
     public string Nombre { get; set; }
@@ -23,8 +22,7 @@ public class Jugador
         Fichas -= FichasMesa;
     }
     public void AcreditarFichas(ushort FichasMesa)
-    => Fichas += FichasMesa;
+        => Fichas += FichasMesa;
 
-    public void Jugarresto()
-    => Fichas = 0;
+    public void JugarResto() => Fichas = 0;
 }
