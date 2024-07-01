@@ -8,6 +8,7 @@ classDiagram
     Mazo --* Ronda
     Ronda --* IMezclador
     Jugadores --o Ronda
+    Motor ..> Ronda
 
 
     class Jugadores{
@@ -49,9 +50,16 @@ classDiagram
         ~ ConPilaCartas(IEnumerable~Carta~)
     }
 
+    class Motor{
+        Mesa mesa
+        jugadores List~Jugador~
+        int indiceMano 
+        IMezclador mezclador 
+        ushort fichasIniciales
+        int ronda
+        Iniciar()
+        Dispose()
+        Sacar(Jugador)
+    }
 
 ```
-
-Motor conoce una mesa,
-ronda es mesa,
-Hacer los cambios de josbert.
