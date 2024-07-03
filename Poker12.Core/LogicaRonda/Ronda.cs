@@ -4,6 +4,7 @@ namespace Poker12.Core.LogicaRonda;
 public class Ronda
 {
     private static int _cantidadCartasMesa = 5;
+    private static int _dadasVuelta = 3;
     public ushort ApuestaInicial { get; set; }
     public ushort ApuestaTotal { get; private set; } = 0;
     private List<Jugador> Jugadores { get; set; }
@@ -16,4 +17,23 @@ public class Ronda
         CartaMesa = new(mazo.Sacar(_cantidadCartasMesa));
     }
     public void IncrementarPozo(ushort fichas) => ApuestaTotal += fichas;
+    public void DarCartas()
+    {
+        //TODO dar 2 cartas del maso al jugador JOUSE
+    }
+    public void Jugar()
+    {
+        
+    }
+
+    public void DarVueltaInicial()
+    {
+        //TODO dar vuelta "_dadasVuelta" veces las cartas de la mesa
+    }
+    public void PreguntarA(Jugador jugador, CartaMesa cartaMesa)
+    {
+
+    }
+    public void ProcesarRespuesta(RespuestaJugadorARonda respuesta)
+        => respuesta.Ejecutar();
 }
