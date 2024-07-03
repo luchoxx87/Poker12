@@ -4,7 +4,7 @@ public class Mantener(Jugador jugador, Ronda ronda, ushort apuesta)
 {
     public override void Ejecutar()
     {
-        jugador.SacarFichas(apuesta);
         ronda.IncrementarPozo(apuesta);
+        jugador.SacarFichas(apuesta);
     }
 }
