@@ -33,15 +33,19 @@ public class Jugador
     /// <param name="segunda"></param>
     public void EntregarCartas(Carta primera, Carta segunda)
     {
-        //TODO
+        Carta1 = primera;
+        Carta2 = segunda;
     }
     /// <summary>
-    /// Asigna las cartas en orden, si la primera es null, asigna la segunda.
+    /// Asigna las cartas en orden, si la primera es null le asigna valor, caso contrario asigna la segunda.
     /// </summary>
     /// <param name="carta"></param>
     public void EntregarCarta(Carta carta)
     {
-        //TODO
+        if (Carta1 is null)
+            Carta1 = carta;
+        else
+            Carta2 = carta;
     }
     public void Descartar()
         => Carta1 = Carta2 = null;

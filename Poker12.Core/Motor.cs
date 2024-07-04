@@ -23,7 +23,7 @@ public class Motor : IDisposable
         => Jugadores.Clear();
 
     public void SacarJugador(Jugador jugador)
-        => jugador.Activo = false;
+        => jugador.Retirarse();
     public void Premiar(Jugador jugador, ushort fichas)
         => jugador.AcreditarFichas(fichas);
     public int IncrementarIndiceMano()
