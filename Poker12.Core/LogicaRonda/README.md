@@ -58,9 +58,11 @@ sequenceDiagram
     participant ApostarTodo
     participant Jugador
     
-    Ronda ->> ApostarTodo: IncremenntarPozo()
+    Ronda ->> ApostarTodo: Ejecutar()
+    Ronda ->> ApostarTodo: IncrementarPozo()
     ApostarTodo ->> Jugador: JugarResto()
     Jugador -->> ApostarTodo: ""
+    ApostarTodo -->> Ronda: ""
     ApostarTodo -->> Ronda: ""
 ```
 
@@ -71,9 +73,11 @@ sequenceDiagram
     participant Mantener
     participant Jugador
 
+    Ronda ->> Mantener: Ejecutar()
     Ronda ->> Mantener: IncrementarPozo()
     Mantener ->> Jugador: SacarFichas()
     Jugador -->> Mantener: ""
+    Mantener -->> Ronda: ""
     Mantener -->> Ronda: ""
 ```
 #### Secuencia para Subir Apuesta
@@ -83,8 +87,10 @@ sequenceDiagram
     participant SubirApuesta
     participant Jugador
 
+    Ronda ->> SubirApuesta: Ejecutar()
     Ronda ->> SubirApuesta: IncrementarPozo()
     SubirApuesta ->> Jugador: SacarFichas()
     Jugador -->> SubirApuesta: ""
+    SubirApuesta -->> Ronda: ""
     SubirApuesta -->> Ronda: ""
 ```
