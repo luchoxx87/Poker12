@@ -1,7 +1,7 @@
 using Poker12.Core.ColeccionesCartas;
 
 namespace Poker12.Core.LogicaRonda.Test;
-internal class RespuestaBase
+public abstract class RespuestaBase
 {
     protected Ronda ronda;
     protected Jugador Tomy;
