@@ -20,6 +20,13 @@ public class Ronda
     public void DarCartas()
     {
         //TODO dar 2 cartas del maso al jugador JOUSE
+        foreach (var jugador in Jugadores)
+        {
+                var  cartas= Mazo.Sacar(2).ToList();
+                var primera=cartas[0];
+                var segunda=cartas[1];
+                jugador.EntregarCartas(primera, segunda);
+        }
     }
     public void Jugar()
     {
